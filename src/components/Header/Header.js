@@ -20,24 +20,24 @@ const Header = () => {
           <Logo />
         </LogoWrapper>
         <DesktopNav>
-          <NavLink href="/sale">Sale</NavLink>
-          <NavLink href="/new">New&nbsp;Releases</NavLink>
-          <NavLink href="/men">Men</NavLink>
-          <NavLink href="/women">Women</NavLink>
-          <NavLink href="/kids">Kids</NavLink>
-          <NavLink href="/collections">Collections</NavLink>
+          <DesktopNavLink href='/sale' text='Sale' />
+          <DesktopNavLink href='/new' text='New&nbsp;Releases' />
+          <DesktopNavLink href='/men' text='Men' />
+          <DesktopNavLink href='/women' text='Women' />
+          <DesktopNavLink href='/kids' text='Kids' />
+          <DesktopNavLink href='/collections' text='Collections' />
         </DesktopNav>
         <MobileActions>
           <ShoppingBagButton>
-            <Icon id="shopping-bag" />
+            <Icon id='shopping-bag' />
             <VisuallyHidden>Open cart</VisuallyHidden>
           </ShoppingBagButton>
           <UnstyledButton>
-            <Icon id="search" />
+            <Icon id='search' />
             <VisuallyHidden>Search</VisuallyHidden>
           </UnstyledButton>
           <UnstyledButton onClick={() => setShowMobileMenu(true)}>
-            <Icon id="menu" />
+            <Icon id='menu' />
             <VisuallyHidden>Open menu</VisuallyHidden>
           </UnstyledButton>
         </MobileActions>
@@ -114,15 +114,47 @@ const Filler = styled.div`
   }
 `;
 
+const DesktopNavLink = ({ text, href }) => {
+  return (
+    <NavLink href={href}>
+      <NavText>{text}</NavText>
+      <SlideUpText>{text}</SlideUpText>
+    </NavLink>
+  );
+};
+
+const NavText = styled.span`
+  display: block;
+  transition: transform 300ms ease-out;
+  will-change: transform;
+`;
+
+const SlideUpText = styled.span`
+  display: block;
+  position: absolute;
+  bottom: -100%;
+  left: 0;
+  font-weight: ${WEIGHTS.bold};
+  transition: transform 300ms ease-out;
+  will-change: transform;
+`;
+
 const NavLink = styled.a`
   font-size: 1.125rem;
   text-transform: uppercase;
   text-decoration: none;
   color: var(--color-gray-900);
   font-weight: ${WEIGHTS.medium};
+  position: relative;
+  overflow: hidden;
 
   &:first-of-type {
     color: var(--color-secondary);
+  }
+
+  &:hover ${NavText}, &:hover ${SlideUpText} {
+    transform: translateY(-100%);
+    transition: transform 200ms ease-in;
   }
 `;
 
