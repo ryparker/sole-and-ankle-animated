@@ -152,9 +152,11 @@ const NavLink = styled.a`
     color: var(--color-secondary);
   }
 
-  &:hover ${NavText}, &:hover ${SlideUpText} {
-    transform: translateY(-100%);
-    transition: transform 200ms ease-in;
+  @media (prefers-reduced-motion: no-preference) {
+    &:hover ${NavText}, &:hover ${SlideUpText} {
+      transform: translateY(-100%);
+      transition: transform 200ms ease-in;
+    }
   }
 `;
 

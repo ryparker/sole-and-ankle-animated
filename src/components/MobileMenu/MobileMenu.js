@@ -14,7 +14,6 @@ const MobileMenu = ({ isOpen, onDismiss }) => {
   return (
     <Overlay isOpen={isOpen} onDismiss={onDismiss}>
       <Content aria-label='Menu'>
-        <ContentSide />
         <CloseButton onClick={onDismiss}>
           <Icon id='close' />
           <VisuallyHidden>Dismiss menu</VisuallyHidden>
@@ -69,10 +68,13 @@ const Overlay = styled(DialogOverlay)`
   perspective: 1000px;
   transform-style: preserve-3d;
 
-  will-change: opacity;
   --overlay-fadein-duration: 200ms;
-  animation: ${fadeInKeyframes} var(--overlay-fadein-duration) ease-in;
   animation-fill-mode: both;
+  will-change: opacity;
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: ${fadeInKeyframes} var(--overlay-fadein-duration) ease-in;
+  }
 `;
 
 const Content = styled(DialogContent)`
@@ -83,24 +85,15 @@ const Content = styled(DialogContent)`
   display: flex;
   flex-direction: column;
 
-  will-change: transform;
   transform-origin: center right;
-
-  --content-slidin-duration: 500ms;
-  animation: ${slideInKeyframes} var(--content-slidin-duration) ease-in-out;
-  animation-delay: var(--overlay-fadein-duration);
   animation-fill-mode: both;
-`;
+  --content-slidin-duration: 500ms;
+  will-change: transform;
+  animation-delay: var(--overlay-fadein-duration);
 
-const ContentSide = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 10%;
-
-  transform: rotateY(90deg) translateX(-50%);
-  background: var(--color-secondary);
+  @media (prefers-reduced-motion: no-preference) {
+    animation: ${slideInKeyframes} var(--content-slidin-duration) ease-in-out;
+  }
 `;
 
 const CloseButton = styled(UnstyledButton)`
@@ -127,14 +120,16 @@ const NavLink = styled.a`
     color: var(--color-secondary);
   }
 
-  will-change: opacity;
-
   --navlink-fadein-duration: 200ms;
-  animation: ${fadeInKeyframes} var(--navlink-fadein-duration) ease-out;
+  animation-fill-mode: both;
+  will-change: opacity;
   animation-delay: calc(
     var(--overlay-fadein-duration) + var(--content-slidin-duration)
   );
-  animation-fill-mode: both;
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: ${fadeInKeyframes} var(--navlink-fadein-duration) ease-out;
+  }
 `;
 
 const Filler = styled.div`

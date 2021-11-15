@@ -96,14 +96,16 @@ const Link = styled.a`
   text-decoration: none;
   color: inherit;
 
-  &:hover img {
-    transform: scale(1.1);
-    transition: transform 200ms ease-out;
-  }
+  @media (prefers-reduced-motion: no-preference) {
+    &:hover img {
+      transform: scale(1.1);
+      transition: transform 200ms ease-out;
+    }
 
-  &:hover ${Flag} {
-    transform: scale(1.1);
-    transition: transform 200ms ease-out;
+    &:hover ${Flag} {
+      transform: scale(1.1);
+      transition: transform 200ms ease-out;
+    }
   }
 `;
 
