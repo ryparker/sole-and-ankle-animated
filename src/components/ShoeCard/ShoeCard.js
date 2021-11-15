@@ -34,13 +34,11 @@ const ShoeCard = ({
   return (
     <Link href={`/shoe/${slug}`}>
       <Wrapper>
-        <FlaggedImage>
-          <ImageWrapper>
-            <Image alt='' src={imageSrc} />
-          </ImageWrapper>
-          {variant === 'on-sale' && <SaleFlag>Sale</SaleFlag>}
-          {variant === 'new-release' && <NewFlag>Just released!</NewFlag>}
-        </FlaggedImage>
+        <ImageWrapper>
+          <Image alt='' src={imageSrc} />
+        </ImageWrapper>
+        {variant === 'on-sale' && <SaleFlag>Sale</SaleFlag>}
+        {variant === 'new-release' && <NewFlag>Just released!</NewFlag>}
 
         <Spacer size={12} />
         <Row>
@@ -82,7 +80,10 @@ const Flag = styled.div`
 
   will-change: transform;
   transform-origin: center right;
-  transition: transform 300ms ease-in;
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    transition: transform 300ms ease-in;
+  }
 `;
 
 const SaleFlag = styled(Flag)`
@@ -96,22 +97,21 @@ const Link = styled.a`
   text-decoration: none;
   color: inherit;
 
-  @media (prefers-reduced-motion: no-preference) {
-    &:hover img {
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    &:hover img,
+    &:focus img {
       transform: scale(1.1);
       transition: transform 200ms ease-out;
     }
 
-    &:hover ${Flag} {
+    &:hover ${Flag}, &:focus ${Flag} {
       transform: scale(1.1);
       transition: transform 200ms ease-out;
     }
   }
 `;
 
-const Wrapper = styled.article``;
-
-const FlaggedImage = styled.div`
+const Wrapper = styled.article`
   position: relative;
 `;
 
@@ -122,12 +122,13 @@ const ImageWrapper = styled.div`
 `;
 
 const Image = styled.img`
+  display: block;
   width: 100%;
-  will-change: transform;
   object-fit: cover;
+  will-change: transform;
   transform-origin: bottom center;
 
-  @media (prefers-reduced-motion: no-preference) {
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
     transition: transform 300ms ease-in;
   }
 `;

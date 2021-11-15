@@ -114,11 +114,11 @@ const Filler = styled.div`
   }
 `;
 
-const DesktopNavLink = ({ text, href }) => {
+const DesktopNavLink = ({ children, ...delegated }) => {
   return (
-    <NavLink href={href}>
-      <NavText>{text}</NavText>
-      <SlideUpText>{text}</SlideUpText>
+    <NavLink {...delegated}>
+      <NavText>{children}</NavText>
+      <SlideUpText>{children}</SlideUpText>
     </NavLink>
   );
 };
@@ -152,7 +152,7 @@ const NavLink = styled.a`
     color: var(--color-secondary);
   }
 
-  @media (prefers-reduced-motion: no-preference) {
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
     &:hover ${NavText}, &:hover ${SlideUpText} {
       transform: translateY(-100%);
       transition: transform 200ms ease-in;
