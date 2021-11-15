@@ -46,12 +46,12 @@ const fadeInKeyframes = keyframes`
   }
 `;
 
-const slideInKeyframes = keyframes`
+const swingInKeyframes = keyframes`
   from {
     transform: rotateY(90deg);
   }
   to {
-    transform: rotateY(0deg);
+    transform: rotateY(-1deg);
   }
 `;
 
@@ -69,11 +69,11 @@ const Overlay = styled(DialogOverlay)`
   transform-style: preserve-3d;
 
   --overlay-fadein-duration: 200ms;
-  animation-fill-mode: both;
   will-change: opacity;
 
   @media (prefers-reduced-motion: no-preference) {
     animation: ${fadeInKeyframes} var(--overlay-fadein-duration) ease-in;
+    animation-fill-mode: both;
   }
 `;
 
@@ -86,13 +86,13 @@ const Content = styled(DialogContent)`
   flex-direction: column;
 
   transform-origin: center right;
-  animation-fill-mode: both;
   --content-slidin-duration: 500ms;
   will-change: transform;
-  animation-delay: var(--overlay-fadein-duration);
 
   @media (prefers-reduced-motion: no-preference) {
-    animation: ${slideInKeyframes} var(--content-slidin-duration) ease-in-out;
+    animation: ${swingInKeyframes} var(--content-slidin-duration) ease-in-out;
+    animation-delay: var(--overlay-fadein-duration);
+    animation-fill-mode: both;
   }
 `;
 
@@ -121,14 +121,14 @@ const NavLink = styled.a`
   }
 
   --navlink-fadein-duration: 200ms;
-  animation-fill-mode: both;
   will-change: opacity;
-  animation-delay: calc(
-    var(--overlay-fadein-duration) + var(--content-slidin-duration)
-  );
 
   @media (prefers-reduced-motion: no-preference) {
     animation: ${fadeInKeyframes} var(--navlink-fadein-duration) ease-out;
+    animation-delay: calc(
+      var(--overlay-fadein-duration) + var(--content-slidin-duration)
+    );
+    animation-fill-mode: both;
   }
 `;
 

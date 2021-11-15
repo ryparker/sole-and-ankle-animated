@@ -117,12 +117,12 @@ const FlaggedImage = styled.div`
 
 const ImageWrapper = styled.div`
   position: relative;
+  border-radius: 16px 16px 4px 4px;
   overflow: hidden;
 `;
 
 const Image = styled.img`
   width: 100%;
-  border-radius: 16px 16px 4px 4px;
   will-change: transform;
   object-fit: cover;
   transform-origin: bottom center;
